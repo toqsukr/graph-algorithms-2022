@@ -1,0 +1,6 @@
+UNDIRECTED 4
+ 0
+8b764c7b-eb7c-4052-9d02-fd3d8241a651 gray null a 82 24
+21bad13c-a720-41a8-afe0-2ececed0cb2b gray null b 283 280
+c98469d1-9312-4863-a603-6c3528a8c817 gray null c 77 207
+2cdffa59-b745-41ee-9f59-47d1049d1316 gray null d 344 67
