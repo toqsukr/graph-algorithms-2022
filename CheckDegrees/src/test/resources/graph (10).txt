@@ -1,0 +1,8 @@
+UNDIRECTED 3
+ 3
+d53069d6-f669-406a-b8f6-fa5af2fadc99 green 2 2 423 -19
+bcc5e042-326b-4453-ab25-8563b1dbca67 green 2 2 224 187
+ee40297f-8778-4cd2-b71c-811c8cdac538 green 2 2 446 201
+bcc5e042-326b-4453-ab25-8563b1dbca67 ee40297f-8778-4cd2-b71c-811c8cdac538 blue null null 
+ee40297f-8778-4cd2-b71c-811c8cdac538 d53069d6-f669-406a-b8f6-fa5af2fadc99 blue null null 
+d53069d6-f669-406a-b8f6-fa5af2fadc99 bcc5e042-326b-4453-ab25-8563b1dbca67 blue null null 
