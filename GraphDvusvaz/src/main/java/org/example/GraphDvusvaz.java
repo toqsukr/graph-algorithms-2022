@@ -10,30 +10,32 @@ import com.mathsystem.api.graph.model.Graph;
 import com.mathsystem.api.graph.model.Vertex;
 import com.mathsystem.domain.plugin.plugintype.GraphProperty;
 
+import bicon.GraphBicon.GraphAdjMatrix;
+
 public class GraphDvusvaz implements GraphProperty {
 	private int vertexCount;
 	private int edgeCount;
+	private int timer;
 	private boolean[] used;
+	private boolean dv;
+	private int[] tin;
+	private int[] fup;
 
 	public boolean execute(Graph graph) {
 		GraphAdjMatrix graphMatrix = new GraphAdjMatrix(graph);
 		vertexCount = graphMatrix.matrix.length;
 		edgeCount = graph.getEdgeCount();
 		used = new boolean[vertexCount];
+		tin = new int[vertexCount];
+		fup = new int[vertexCount];
+		timer = 0;
 		Arrays.fill(used, false);
 
-		DFS(graphMatrix, 0, -1, used); //проверка графа на связность
+		DFS(graphMatrix, 0, -1); //проверка графа на связность
 		if (!isAllVisited(used))
 			return false;
 
-		for (int i = 0; i < vertexCount; i++) { //"удаляем" по одной точке и проверяем, остался ли граф связным 
-			Arrays.fill(used, false);
-			used[i] = true; //отмечаем "удаленную" точку, чтобы она не влияла на оценку связности
-			DFS(graphMatrix, (i != 0) ? i - 1 : i + 1, i, used);
-			if (!isAllVisited(used))
-				return false;
-		}
-		return true;
+		return dv;
 
 	}
 
@@ -45,18 +47,28 @@ public class GraphDvusvaz implements GraphProperty {
 		return true;
 	}
 
-	private void DFS(GraphAdjMatrix matrix, int v, int exc, boolean[] used) { //обход в глубину
+	private void DFS(GraphAdjMatrix matrix, int v, int p) { //обход в глубину
 		used[v] = true;
-		
-		if (v != exc) { //является ли точка "удаленной"
-			for (int j = 0; j < edgeCount; j++) {
-				if (matrix.matrix[v][j] != -1 
-						&& matrix.matrix[v][j] != exc 
-						&& !used[matrix.matrix[v][j]]) { //если путь существует, точка не "удалена" и не использована
-					DFS(matrix, matrix.matrix[v][j], exc, used);
+		tin[v] = fup[v] = timer++;
+		int children = 0;
+		for (int j = 0; j < edgeCount; j++) {
+			if (matrix.matrix[v][j] != -1) { //если путь существует
+				int to = matrix.matrix[v][j];
+				if (to == p) continue;
+				if (used[to])
+					fup[v] = Math.min(fup[v], tin[to]);
+				else {
+					DFS(matrix, to, v);
+					fup[v] = Math.min(fup[v], fup[to]);
+					if (fup[to] >= tin[v] && p!=-1)
+						dv= false;
+					++children;
 				}
 			}
 		}
+		if (p==-1 && children > 1)
+			dv = false;
+		
 	}
 
 	public static class GraphAdjMatrix {
