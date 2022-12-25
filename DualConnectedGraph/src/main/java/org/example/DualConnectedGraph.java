@@ -15,20 +15,21 @@ public class DualConnectedGraph implements GraphProperty {
         boolean ans = false;
         if (abstractGraph.getVertexCount() != 0){
             G = createAdjacencyList(abstractGraph);
-            for (int i=0; i<G.length; i++){
-                System.out.print(i);
-                System.out.print(" : ");
-                for (int j=0; j<G[i].length; j++){
-                    System.out.print(G[i][j]);
-                    System.out.print(" ");
-                }
-                System.out.println(" ");
-            }
+//            for (int i=0; i<G.length; i++){
+//                System.out.print(i);
+//                System.out.print(" : ");
+//                for (int j=0; j<G[i].length; j++){
+//                    System.out.print(G[i][j]);
+//                    System.out.print(" ");
+//                }
+//                System.out.println(" ");
+//            }
             Graph_1 test = new Graph_1(G);
             ans = test.main(test);
         }
         else { ans = false;}
         if (abstractGraph.getEdgeCount()==0) {ans=false;}
+        if (abstractGraph.getVertexCount()==1) {ans=true;}
 
         return ans;
     }
