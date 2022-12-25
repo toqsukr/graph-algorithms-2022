@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        File s = new File("src/main/resources/graph_4.txt");
+        File s = new File("src/main/resources/graph_1.txt");
         Graph graph = GraphFactory.loadGraphFromFile(s);
         TransitiveClosureCheck graphLeaves = new TransitiveClosureCheck();
         System.out.println(graphLeaves.execute(graph));
