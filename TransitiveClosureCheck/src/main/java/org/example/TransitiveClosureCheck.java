@@ -143,7 +143,7 @@ public class TransitiveClosureCheck implements GraphProperty {
             oldGraphVertices.put(vertex1ID, graph.getVertices().get(vertex1ID));
             vertexMark.put(vertex1ID, 1);
             for(UUID vertex2ID : graph.getVertices().keySet()) {
-                if(vertexMark.get(vertex2ID) != 1 && adjacencyMatrixSource.get(vertex1ID).get(vertex2ID) == 1 || adjacencyMatrixSource.get(vertex2ID).get(vertex1ID) == 1) {
+                if(vertexMark.get(vertex2ID) != 1 && (adjacencyMatrixSource.get(vertex1ID).get(vertex2ID) == 1 || adjacencyMatrixSource.get(vertex2ID).get(vertex1ID) == 1)) {
                     DFS(first, graph, vertex2ID, vertexMark, oldGraphVertices, adjacencyMatrixSource);
                 }
             }
