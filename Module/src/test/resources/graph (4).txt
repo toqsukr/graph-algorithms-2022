@@ -1,5 +1,0 @@
-UNDIRECTED 2
- 1
-550e9a55-79cb-4fd4-ba30-3ff970e5eba0 gray 1 0 246 290
-8b815200-cd35-47c5-a63b-b29265116aac gray 1 0 337 226
-8b815200-cd35-47c5-a63b-b29265116aac 550e9a55-79cb-4fd4-ba30-3ff970e5eba0 gray null null 
