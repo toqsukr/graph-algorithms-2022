@@ -1,0 +1,3 @@
+UNDIRECTED 1
+ 0
+e8d2dda8-24fb-4f20-aa29-507fde2ced1b gray null null 294 235
