@@ -51,8 +51,6 @@ public class TransitiveClosureCheck implements GraphProperty {
 
         algorithmWarshall(oldGraphEdges.size() > lastGraphEdges.size() ? adjacencyMatrixLast : adjacencyMatrixOld);
 
-        int[][] matrixOld = new int[adjacencyMatrixOld.size()][adjacencyMatrixOld.size()];
-        int[][] matrixLast = new int[adjacencyMatrixLast.size()][adjacencyMatrixLast.size()];
         if(adjacencyMatrixOld.size() != adjacencyMatrixLast.size())     isTransitiveClosure = false;
         else {
             for(UUID vertix1 : adjacencyMatrixOld.keySet()) {
@@ -98,24 +96,15 @@ public class TransitiveClosureCheck implements GraphProperty {
 
     private void algorithmWarshall(Map <UUID, Map<UUID, Integer>> adjacencyMatrix) {
         int[][] bitArray = new int[adjacencyMatrix.size()][adjacencyMatrix.size()];
-        int[][] answer = new int[adjacencyMatrix.size()][adjacencyMatrix.size()];
         int countVertix1 = 0, countVertix2 = 0;
         for(UUID vertix1: adjacencyMatrix.keySet()) {
             countVertix2 = 0;
             for(UUID vertix2: adjacencyMatrix.keySet()) {
                 bitArray[countVertix1][countVertix2 % adjacencyMatrix.size()] = adjacencyMatrix.get(vertix1).get(vertix2) == 1 ? 1 : 0;
-                answer[countVertix1][countVertix2 % adjacencyMatrix.size()] = adjacencyMatrix.get(vertix1).get(vertix2) == 1 ? 1 : 0;
                 countVertix2++;
             }
             countVertix1++;
         }
-        for(int i = 0;i < adjacencyMatrix.size();i++) {
-            for(int j = 0;j < adjacencyMatrix.size();j++) {
-            }
-
-        }
-
-
             for(int i = 0;i < adjacencyMatrix.size();i++) {
                 for (int j = 0; j < adjacencyMatrix.size(); j++) {
                     if(bitArray[i][j] == 1) {
@@ -125,7 +114,15 @@ public class TransitiveClosureCheck implements GraphProperty {
                     }
                 }
             }
-
+        for(int i = 0;i < adjacencyMatrix.size();i++) {
+            for (int j = 0; j < adjacencyMatrix.size(); j++) {
+                if(bitArray[i][j] == 1) {
+                    for(int k = 0;k < adjacencyMatrix.size();k++) {
+                        bitArray[i][k] = bitArray[i][k] | bitArray[j][k];
+                    }
+                }
+            }
+        }
 
         countVertix1 = 0;
         countVertix2 = 0;
